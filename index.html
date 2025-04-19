@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>फंडिंग अभियान</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #fffbe6;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .container {
+      background-color: #ffffff;
+      padding: 40px 30px;
+      border-radius: 20px;
+      box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
+      text-align: center;
+      max-width: 500px;
+      width: 90%;
+      animation: fadeIn 1s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    h1 {
+      color: #e65100;
+      font-size: 2.2rem;
+      margin-bottom: 20px;
+    }
+
+    .info p {
+      padding: 12px;
+      border-radius: 10px;
+      margin: 10px 0;
+      font-size: 1.1rem;
+      line-height: 1.5;
+    }
+
+    .para1 {
+      background-color: #ffecb3;
+      color: #5d4037;
+      font-weight: bold;
+      border-left: 5px solid #ff9800;
+    }
+
+    .para2 {
+      background-color: #c8e6c9;
+      color: #1b5e20;
+      font-style: italic;
+      border-left: 5px solid #388e3c;
+    }
+
+    .para3 {
+      background-color: #bbdefb;
+      color: #0d47a1;
+      text-decoration: underline;
+      border-left: 5px solid #1976d2;
+    }
+
+    .stats {
+      margin: 20px 0;
+      font-size: 1rem;
+      color: #333;
+      background: #fff8e1;
+      border-radius: 10px;
+      padding: 15px;
+      line-height: 1.6;
+      border: 1px dashed #f57c00;
+    }
+
+    .stats i {
+      margin-right: 8px;
+      color: #f57c00;
+    }
+
+    .donation-action {
+      margin-top: 25px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    #donationAmount {
+      padding: 12px;
+      border: 2px solid transparent;
+      border-image: linear-gradient(45deg, #ff9800, #4caf50) 1;
+      border-radius: 10px;
+      font-size: 1.1rem;
+      width: 80%;
+      max-width: 250px;
+      background: linear-gradient(45deg, #fff8e1, #e8f5e9);
+      margin-bottom: 10px;
+    }
+
+    .slider-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+    }
+
+    #rangeSlider {
+      width: 80%;
+      max-width: 300px;
+      accent-color: #4caf50;
+      margin-bottom: 5px;
+    }
+
+    button {
+      background-color: #43a047;
+      color: white;
+      border: none;
+      padding: 14px 30px;
+      font-size: 1.1rem;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    button i {
+      margin-right: 8px;
+    }
+
+    button:hover {
+      background-color: #388e3c;
+      transform: scale(1.05);
+    }
+
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 1.6rem;
+      }
+
+      button {
+        font-size: 1rem;
+        padding: 12px 24px;
+      }
+
+      #donationAmount, #rangeSlider {
+        width: 90%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1><i class="fas fa-hands-helping"></i> फंडिंग अभियान</h1>
+
+    <div class="info">
+      <p class="para1"><i class="fas fa-bullseye"></i> हमारा लक्ष्य ₹1,00,000 जुटाना है।</p>
+      <p class="para2"><i class="fas fa-heart"></i> आपका योगदान अमूल्य है!</p>
+      <p class="para3"><i class="fas fa-users"></i> हर योगदान इस दिव्य यज्ञ का एक आहुति है।</p>
+    </div>
+
+    <div class="stats" id="fundStats">
+      <i class="fas fa-user-friends"></i> कुल दाताओं की संख्या: 0<br>
+      <i class="fas fa-rupee-sign"></i> अभी तक की राशि: ₹0<br>
+      <i class="fas fa-hourglass-half"></i> शेष राशि: ₹100000
+    </div>
+
+    <div class="donation-action">
+      <input type="number" id="donationAmount" placeholder="राशि दर्ज करें">
+      <div class="slider-container">
+        <input type="range" id="rangeSlider" min="0" max="10000" step="100" value="0">
+        <span id="sliderValue">₹0</span>
+      </div>
+      <button id="donate-btn"><i class="fas fa-donate"></i> दान करें</button>
+    </div>
+  </div>
+
+  <script>
+    const TARGET = 100000;
+    let totalDonors = localStorage.getItem('totalDonors') ? parseInt(localStorage.getItem('totalDonors')) : 0;
+    let totalAmount = localStorage.getItem('totalAmount') ? parseInt(localStorage.getItem('totalAmount')) : 0;
+
+    const donationInput = document.getElementById("donationAmount");
+    const rangeSlider = document.getElementById("rangeSlider");
+    const sliderValue = document.getElementById("sliderValue");
+
+    // Sync range slider with input box
+    rangeSlider.addEventListener("input", () => {
+      donationInput.value = rangeSlider.value;
+      sliderValue.textContent = ₹${rangeSlider.value};
+    });
+
+    donationInput.addEventListener("input", () => {
+      rangeSlider.value = donationInput.value;
+      sliderValue.textContent = ₹${donationInput.value};
+    });
+
+    function updateStats() {
+      const stats = document.getElementById("fundStats");
+      const remaining = Math.max(0, TARGET - totalAmount);
+      stats.innerHTML = `
+        <i class="fas fa-user-friends"></i> कुल दाताओं की संख्या: ${totalDonors}<br>
+        <i class="fas fa-rupee-sign"></i> अभी तक की राशि: ₹${totalAmount}<br>
+        <i class="fas fa-hourglass-half"></i> शेष राशि: ₹${remaining}
+      `;
+    }
+
+    updateStats();
+
+    document.getElementById("donate-btn").addEventListener("click", () => {
+      let donation = parseInt(donationInput.value);
+
+      if (!isNaN(donation) && donation > 0) {
+        totalDonors++;
+        totalAmount += donation;
+        localStorage.setItem('totalDonors', totalDonors);
+        localStorage.setItem('totalAmount', totalAmount);
+
+        const simulatedBankData = {
+          name: "रवि शर्मा",
+          bank: "SBI"
+        };
+
+        window.location.href = thankyou.html?name=${encodeURIComponent(simulatedBankData.name)}&donation=${donation}&bank=${encodeURIComponent(simulatedBankData.bank)};
+      } else {
+        alert("कृपया एक मान्य राशि दर्ज करें।");
+      }
+    });
+  </script>
+</body>
+</html>
