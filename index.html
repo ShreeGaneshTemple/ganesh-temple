@@ -6,10 +6,7 @@
   <title>फंडिंग अभियान</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <style>
-    * {
-      box-sizing: border-box;
-    }
-
+    * { box-sizing: border-box; }
     body {
       font-family: 'Segoe UI', sans-serif;
       margin: 0;
@@ -20,29 +17,25 @@
       align-items: center;
       min-height: 100vh;
     }
-
     .container {
       background-color: #ffffff;
       padding: 40px 30px;
       border-radius: 20px;
       box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
       text-align: center;
-      max-width: 500px;
+      max-width: 600px;
       width: 90%;
       animation: fadeIn 1s ease;
     }
-
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(20px); }
       to { opacity: 1; transform: translateY(0); }
     }
-
     h1 {
       color: #e65100;
       font-size: 2.2rem;
       margin-bottom: 20px;
     }
-
     .info p {
       padding: 12px;
       border-radius: 10px;
@@ -50,28 +43,31 @@
       font-size: 1.1rem;
       line-height: 1.5;
     }
-
     .para1 {
       background-color: #ffecb3;
       color: #5d4037;
       font-weight: bold;
       border-left: 5px solid #ff9800;
     }
-
     .para2 {
       background-color: #c8e6c9;
       color: #1b5e20;
       font-style: italic;
       border-left: 5px solid #388e3c;
     }
-
     .para3 {
       background-color: #bbdefb;
       color: #0d47a1;
       text-decoration: underline;
       border-left: 5px solid #1976d2;
     }
-
+    .para4 {
+      background-color: #ffebee;
+      color: #c2185b;
+      font-weight: bold;
+      font-size: 1.2rem;
+      border-left: 5px solid #d32f2f;
+    }
     .stats {
       margin: 20px 0;
       font-size: 1rem;
@@ -82,46 +78,87 @@
       line-height: 1.6;
       border: 1px dashed #f57c00;
     }
-
-    .stats i {
-      margin-right: 8px;
-      color: #f57c00;
+    .progress-bar {
+      width: 100%;
+      height: 30px;
+      background-color: #eee;
+      border-radius: 15px;
+      overflow: hidden;
+      margin: 20px 0;
     }
-
-    .donation-action {
-      margin-top: 25px;
+    .progress {
+      height: 100%;
+      background: linear-gradient(90deg, #4caf50, #81c784);
+      width: 0%;
       display: flex;
-      flex-direction: column;
       align-items: center;
+      padding-left: 10px;
+      color: white;
+      font-weight: bold;
+      font-size: 1rem;
+      border-radius: 15px 0 0 15px;
+      transition: width 0.5s ease;
     }
-
-    #donationAmount {
-      padding: 12px;
-      border: 2px solid transparent;
-      border-image: linear-gradient(45deg, #ff9800, #4caf50) 1;
+    .fund-details {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 10px;
+      font-size: 1.1rem;
+      text-align: center;
+    }
+    .fund-details span {
+      margin: 0 15px;
+    }
+    .donor-count {
+      color: #4caf50;
+      font-weight: bold;
+    }
+    .days-left {
+      color: #0d47a1;
+      font-weight: bold;
+    }
+    .amount-options {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 15px;
+    }
+    .amount-btn {
+      background: #ffecb3;
+      border: 2px solid #ff9800;
+      padding: 10px 20px;
       border-radius: 10px;
       font-size: 1.1rem;
-      width: 80%;
-      max-width: 250px;
-      background: linear-gradient(45deg, #fff8e1, #e8f5e9);
-      margin-bottom: 10px;
+      cursor: pointer;
+      transition: all 0.3s;
     }
-
-    .slider-container {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      width: 100%;
+    .amount-btn.selected {
+      background: #4caf50;
+      color: #fff;
+      border-color: #388e3c;
     }
-
-    #rangeSlider {
-      width: 80%;
-      max-width: 300px;
-      accent-color: #4caf50;
-      margin-bottom: 5px;
+    #customAmountContainer {
+      margin-top: 15px;
+      display: none;
     }
-
-    button {
+    #customAmount {
+      padding: 10px;
+      width: 70%;
+      font-size: 1.1rem;
+      border: 2px solid #4caf50;
+      border-radius: 8px;
+      margin-top: 10px;
+    }
+    #selectedAmountDisplay {
+      margin-top: 15px;
+      font-size: 1.3rem;
+      color: #4caf50;
+      font-weight: bold;
+    }
+    button#donate-btn {
+      margin-top: 20px;
       background-color: #43a047;
       color: white;
       border: none;
@@ -131,109 +168,179 @@
       cursor: pointer;
       transition: all 0.3s ease;
     }
-
-    button i {
-      margin-right: 8px;
-    }
-
-    button:hover {
+    button#donate-btn:hover {
       background-color: #388e3c;
       transform: scale(1.05);
     }
 
+    /* Curved Text Style */
+    .yagya-name {
+      font-size: 2rem;
+      color: #d32f2f;
+      font-weight: bold;
+      background-color: #f2f2f2;
+      padding: 15px;
+      margin-bottom: 20px;
+      border-radius: 10px;
+      text-align: center;
+      position: relative;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    .yagya-name:before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: 50%;
+      width: 300%;
+      height: 200%;
+      background-color: #fffbe6;
+      border-radius: 50%;
+      z-index: -1;
+      transform: translateX(-50%);
+    }
+
+    .location-sign {
+      position: relative;
+      cursor: pointer;
+      display: inline-block;
+      margin-top: 30px;
+    }
+
+    .location-sign img {
+      width: 60px; /* Google Map Icon size */
+      border-radius: 50%;
+    }
+
+    .address-info {
+      position: absolute;
+      bottom: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: rgba(0, 0, 0, 0.7);
+      color: white;
+      font-size: 1.1rem;
+      padding: 8px;
+      border-radius: 8px;
+      display: none;
+      text-align: center;
+    }
+
+    .location-sign:hover .address-info {
+      display: block;
+    }
+.amount-btn {
+    padding: 10px;
+    margin: 5px;
+    cursor: pointer;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  /* Styling for the clicked button */
+  .active-btn {
+    background-color: #4CAF50; /* Change to any color you like */
+    color: white;
+  }
+ #customAmountContainer {
+      display: none; /* Initially hide the custom amount input field */
+    }
+
     @media (max-width: 600px) {
-      h1 {
-        font-size: 1.6rem;
-      }
-
-      button {
-        font-size: 1rem;
-        padding: 12px 24px;
-      }
-
-      #donationAmount, #rangeSlider {
-        width: 90%;
-      }
+      h1 { font-size: 1.6rem; }
+      .amount-btn { font-size: 1rem; padding: 8px 16px; }
+      #customAmount { width: 90%; }
+      button#donate-btn { font-size: 1rem; padding: 12px 24px; }
+      .fund-details { flex-direction: column; align-items: center; text-align: center; }
     }
   </style>
 </head>
 <body>
   <div class="container">
+    <div class="yagya-name">
+      <h1>श्री रूद्र चंडी महायज्ञ</h1>
+    </div>
+
     <h1><i class="fas fa-hands-helping"></i> फंडिंग अभियान</h1>
 
     <div class="info">
-      <p class="para1"><i class="fas fa-bullseye"></i> हमारा लक्ष्य ₹1,00,000 जुटाना है।</p>
+      <p class="para1"><i class="fas fa-bullseye"></i> हमारा लक्ष्य ₹2,00,000 जुटाना है।</p>
       <p class="para2"><i class="fas fa-heart"></i> आपका योगदान अमूल्य है!</p>
       <p class="para3"><i class="fas fa-users"></i> हर योगदान इस दिव्य यज्ञ का एक आहुति है।</p>
     </div>
 
-    <div class="stats" id="fundStats">
-      <i class="fas fa-user-friends"></i> कुल दाताओं की संख्या: 0<br>
-      <i class="fas fa-rupee-sign"></i> अभी तक की राशि: ₹0<br>
-      <i class="fas fa-hourglass-half"></i> शेष राशि: ₹100000
-    </div>
-
-    <div class="donation-action">
-      <input type="number" id="donationAmount" placeholder="राशि दर्ज करें">
-      <div class="slider-container">
-        <input type="range" id="rangeSlider" min="0" max="10000" step="100" value="0">
-        <span id="sliderValue">₹0</span>
+    <div class="location-sign">
+      <div class="address-info">
+        <p>पता: आरसेल-कुट्टी, जबड़ा, सिमरिया, चतरा, झारखंड 825103</p>
       </div>
-      <button id="donate-btn"><i class="fas fa-donate"></i> दान करें</button>
     </div>
+
+    <div class="stats" id="fundStats">
+      <div class="progress-bar">
+        <div class="progress" id="progressBar">
+          <span id="progressAmount">₹0</span>
+        </div>
+      </div>
+
+      <div class="fund-details">
+        <span>दानकर्ता: <span id="donorNumber" class="donor-count">0</span></span>
+        <span>दिन शेष: <span id="daysLeft" class="days-left">0</span></span>
+      </div>
+    </div>
+
+    <div class="amount-options" id="amountOptions">
+  <div class="amount-btn" data-amount="51">₹51</div>
+  <div class="amount-btn" data-amount="101">₹101</div>
+  <div class="amount-btn" data-amount="501">₹501</div>
+  <div class="amount-btn" id="otherBtn">अन्य राशि</div>
+</div>
+
+<div id="customAmountContainer">
+  <input type="number" id="customAmount" placeholder="अपनी राशि दर्ज करें">
+</div>
+
+    <div id="selectedAmountDisplay"></div>
+
+    <button id="donate-btn"><i class="fas fa-donate"></i> दान करें</button>
   </div>
+<script>
+  // Get references to the buttons, input field, and container
+  const amountBtns = document.querySelectorAll('.amount-btn[data-amount]');
+  const customAmountContainer = document.getElementById('customAmountContainer');
+  const customAmountInput = document.getElementById('customAmount');
+  const otherBtn = document.getElementById('otherBtn');
 
-  <script>
-    const TARGET = 100000;
-    let totalDonors = localStorage.getItem('totalDonors') ? parseInt(localStorage.getItem('totalDonors')) : 0;
-    let totalAmount = localStorage.getItem('totalAmount') ? parseInt(localStorage.getItem('totalAmount')) : 0;
+  // Handle clicks on predefined amount buttons (₹51, ₹101, ₹501)
+  amountBtns.forEach(btn => {
+    btn.addEventListener('click', function() {
+      // Remove the active class from all buttons
+      amountBtns.forEach(button => button.classList.remove('active-btn'));
 
-    const donationInput = document.getElementById("donationAmount");
-    const rangeSlider = document.getElementById("rangeSlider");
-    const sliderValue = document.getElementById("sliderValue");
+      // Add the active class to the clicked button
+      this.classList.add('active-btn');
+      
+      // Get the selected amount from the button's data-amount attribute
+      const selectedAmount = this.getAttribute('data-amount');
+      
+      // Show the input field if it's hidden
+      customAmountContainer.style.display = 'block';
 
-    // Sync range slider with input box
-    rangeSlider.addEventListener("input", () => {
-      donationInput.value = rangeSlider.value;
-      sliderValue.textContent = ₹${rangeSlider.value};
+      // Set the input value to the selected amount
+      customAmountInput.value = selectedAmount;
     });
+  });
 
-    donationInput.addEventListener("input", () => {
-      rangeSlider.value = donationInput.value;
-      sliderValue.textContent = ₹${donationInput.value};
-    });
+  // Handle click on "अन्य राशि" (Other Amount)
+  otherBtn.addEventListener('click', function() {
+    // Remove the active class from all buttons
+    amountBtns.forEach(button => button.classList.remove('active-btn'));
+    
+    // Show the input field and clear any previous amount
+    customAmountContainer.style.display = 'block';
+    customAmountInput.value = '';  // Clear the input field for custom amount
 
-    function updateStats() {
-      const stats = document.getElementById("fundStats");
-      const remaining = Math.max(0, TARGET - totalAmount);
-      stats.innerHTML = `
-        <i class="fas fa-user-friends"></i> कुल दाताओं की संख्या: ${totalDonors}<br>
-        <i class="fas fa-rupee-sign"></i> अभी तक की राशि: ₹${totalAmount}<br>
-        <i class="fas fa-hourglass-half"></i> शेष राशि: ₹${remaining}
-      `;
-    }
-
-    updateStats();
-
-    document.getElementById("donate-btn").addEventListener("click", () => {
-      let donation = parseInt(donationInput.value);
-
-      if (!isNaN(donation) && donation > 0) {
-        totalDonors++;
-        totalAmount += donation;
-        localStorage.setItem('totalDonors', totalDonors);
-        localStorage.setItem('totalAmount', totalAmount);
-
-        const simulatedBankData = {
-          name: "रवि शर्मा",
-          bank: "SBI"
-        };
-
-        window.location.href = thankyou.html?name=${encodeURIComponent(simulatedBankData.name)}&donation=${donation}&bank=${encodeURIComponent(simulatedBankData.bank)};
-      } else {
-        alert("कृपया एक मान्य राशि दर्ज करें।");
-      }
-    });
-  </script>
-</body>
+    // Add the active class to the "Other" button
+    this.classList.add('active-btn');
+  });
+</script></body>
 </html>
