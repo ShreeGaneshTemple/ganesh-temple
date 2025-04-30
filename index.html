@@ -10,12 +10,14 @@
   <!-- Open Graph Meta Tags (for Facebook, WhatsApp, LinkedIn etc.) -->
   <meta property="og:title" content="फंडिंग अभियान">
   <meta property="og:description" content="श्री रूद्र चंडी महायज्ञ के पावन अवसर पर भव्य आयोजन एवं दान का पुण्य अवसर। अभी जुड़ें।">
-  <meta property="og:image" content="https://santu21sahu.github.io/ganesh-temple/yagya_poster.jpeg">
-  <meta property="og:image:type" content="image/jpeg">
+  <meta property="og:image" content="https://santu21sahu.github.io/ganesh-temple/website_screenshot.png">
+  <meta property="og:image:type" content="image/png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta property="og:url" content="https://santu21sahu.github.io/ganesh-temple/">
   <meta property="og:type" content="website">
+
+
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <style>
@@ -215,10 +217,32 @@
     border-radius: 5px;
   }
 
-.marq {
-            padding-top: 20px;
-            padding-bottom: 20px;
-        }
+
+.scroll-text-wrapper {
+  overflow: hidden;
+  background-color: #f9fbe7;
+  padding: 10px 0;
+}
+
+.scroll-text {
+  display: inline-block;
+  white-space: nowrap;
+  padding-left: 100%;
+  animation: scroll-left 15s linear infinite;
+  font-weight: bold;
+  font-size: 1.2rem;
+  color: #d32f2f;
+}
+
+@keyframes scroll-left {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
 
 .heading-funding {
     color: orange;
@@ -234,23 +258,25 @@
       display: none; /* Initially hide the custom amount input field */
     }
 
-    @media (max-width: 600px) {
-      h1 { font-size: 1.6rem; }
-      .amount-btn { font-size: 1rem; padding: 8px 16px; }
-      #customAmount { width: 90%; }
-      button#donate-btn { font-size: 1rem; padding: 12px 24px; }
-      .fund-details { flex-direction: column; align-items: center; text-align: center; }
-    }
+    @media (max-width: 480px) {
+  .container {
+    padding: 15px;
+  }
+  .scroll-text {
+    font-size: 1rem;
+  }
+}
+body {
+  padding: 10px;
+}
   </style>
 </head>
 <body>
   <div class="container">
-<marquee class="marq"
-                 direction="left" loop="">
-            <div class="yagya-name">
-      <h1>श्री रूद्र चंडी महायज्ञ | आरसेल-कुट्टी, जबड़ा, सिमरिया, चतरा, झारखंड| </h1>
-    </div>
-        </marquee>
+<div class="scroll-text-wrapper">
+  <div class="scroll-text">
+    श्री रूद्र चंडी महायज्ञ | आरसेल-कुट्टी, जबड़ा, सिमरिया, चतरा, झारखंड |
+  </div>
     
 
     <h1 class="heading-funding"><i class="fas fa-hands-helping"></i> फंडिंग अभियान</h1>
