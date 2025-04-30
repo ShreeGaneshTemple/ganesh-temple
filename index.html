@@ -282,7 +282,7 @@ body {
     <h1 class="heading-funding"><i class="fas fa-hands-helping"></i> फंडिंग अभियान</h1>
 
     <div class="info">
-      <p class="para1"><i class="fas fa-bullseye"></i> हमारा लक्ष्य ₹2,00,000 जुटाना है।</p>
+      <p class="para1"><i class="fas fa-bullseye"></i> हमारा लक्ष्य ₹2,50,000 जुटाना है।</p>
       <p class="para2"><i class="fas fa-heart"></i> आपका योगदान अमूल्य है!</p>
       <p class="para3"><i class="fas fa-users"></i> हर योगदान इस दिव्य यज्ञ का एक आहुति है।</p>
     </div>
@@ -303,9 +303,9 @@ body {
     </div>
 
     <div class="amount-options" id="amountOptions">
+  <div class="amount-btn" data-amount="21">₹21</div>
   <div class="amount-btn" data-amount="51">₹51</div>
   <div class="amount-btn" data-amount="101">₹101</div>
-  <div class="amount-btn" data-amount="501">₹501</div>
   <div class="amount-btn" id="otherBtn">अन्य राशि</div>
 </div>
 
@@ -324,7 +324,7 @@ body {
   const customAmountInput = document.getElementById('customAmount');
   const otherBtn = document.getElementById('otherBtn');
 
-  // Handle clicks on predefined amount buttons (₹21, ₹511, ₹101)
+  // Handle clicks on predefined amount buttons (₹21, ₹51, ₹101)
   amountBtns.forEach(btn => {
     btn.addEventListener('click', function() {
       // Remove the active class from all buttons
